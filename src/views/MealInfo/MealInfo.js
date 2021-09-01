@@ -14,16 +14,19 @@ const MealInfo = () => {
 
     // useEffect() срабатывает когда рендерится компонент !important
     useEffect(async () => {
-            const {data: {meals}} = await axios(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`) // -создаётся запрос на сервер
+        async function fetchData() {
+            const {data: {meals}} = axios(`https://www.themealdb.com/api/json/v1/1/lookup.php?i=${params.id}`) // -создаётся запрос на сервер
             const ingredientsArray = Array(20).fill(0).reduce((acc, item, idx) => {
                 const ingredient = meals[0][`strIngredient${idx + 1}`]
                 return ingredient ? [...acc, ingredient] : acc
             }, []) // ingredientsArray получает массив с ингредиентами
             const youtubeCode = meals[0].strYoutube.slice(meals[0].strYoutube.indexOf("v=") + 2, meals[0].strYoutube.length)
-        setIngredients(ingredientsArray)
-        setMeal(meals[0])
-        setYoutube(youtubeCode)
-        }, [params.id])
+            setIngredients(ingredientsArray)
+            setMeal(meals[0])
+            setYoutube(youtubeCode)
+        }
+        await fetchData()
+    }, [params.id])
     return (
         <div className="dish container">
             <h2 className="menu__title">Full Recipe</h2>
@@ -36,8 +39,8 @@ const MealInfo = () => {
                     </div>
                 </div>
                 <div className="col-6 dish__right-side">
-                    <Ingredients ingredients={ingredients} />
-                    <YouTube youtube={youtube} />
+                    <Ingredients ingredients={ingredients}/>
+                    <YouTube youtube={youtube}/>
                 </div>
                 <BackToMealsButton/>
             </div>

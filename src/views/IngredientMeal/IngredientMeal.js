@@ -8,8 +8,11 @@ const IngredientMeal = () => {
     const [meals, setMeals] = useState([])
     const params = useParams()
     useEffect(async () => {
-        const {data} = await axios(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${params.name}`)
-        setMeals(data.meals)
+        async function fetchData() {
+            const {data} = await axios(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${params.name}`)
+            setMeals(data.meals)
+        }
+        await fetchData()
     }, [params.name])
     return (
         <div className="container">

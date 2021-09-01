@@ -9,8 +9,12 @@ const Browse = () => {
     const [meals, setMeals] = useState([])
     const [notFound, setNotFound] = useState("")
     useEffect(async () => {
-        const {data} = await axios(`https://www.themealdb.com/api/json/v1/1/search.php?s=${params.name}`)
-        !data.meals ? setNotFound("Not Found") : setMeals(data.meals)
+        async function fetchData() {
+            const {data} = await axios(`https://www.themealdb.com/api/json/v1/1/search.php?s=${params.name}`)
+            !data.meals ? setNotFound("Not Found") : setMeals(data.meals)
+        }
+        await fetchData()
+
     }, [params.name])
     return (
         <div className="container dish pt-3">

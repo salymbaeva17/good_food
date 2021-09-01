@@ -6,7 +6,7 @@ const MealsList = ({meals}) => {
         <div className="row ">
             {
                 meals.map(item =>
-                    <div className="col-4 mb-4 d-flex justify-content-center">
+                    <div key={item.idMeal} className="col-4 mb-4 d-flex justify-content-center">
                         <div className="dish__box">
                             <Link to={`/meal/${item.idMeal}`}>
                                 <img src={item.strMealThumb} className="dish__image" alt="item.strMeal" width="300px"/>
