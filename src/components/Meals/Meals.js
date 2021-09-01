@@ -4,12 +4,12 @@ import MealsList from "../MealsList/MealsList";
 
 const Meals = () => {
     const [meals, setMeals] = useState([])
-    useEffect(async () => {
-        async function fetchData() {
+    useEffect( () => {
+        const fetchData = async () => {
             const {data:{meals}} = await axios("https://www.themealdb.com/api/json/v2/1/randomselection.php")
             setMeals(meals)
         }
-        await fetchData()
+        fetchData()
     }, [])
     return (
         <div className="container dish">

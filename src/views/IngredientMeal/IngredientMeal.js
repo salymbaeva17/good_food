@@ -7,12 +7,12 @@ import MealsList from "../../components/MealsList/MealsList";
 const IngredientMeal = () => {
     const [meals, setMeals] = useState([])
     const params = useParams()
-    useEffect(async () => {
-        async function fetchData() {
+    useEffect( () => {
+        const fetchData = async () => {
             const {data} = await axios(`https://www.themealdb.com/api/json/v1/1/filter.php?i=${params.name}`)
             setMeals(data.meals)
         }
-        await fetchData()
+        fetchData()
     }, [params.name])
     return (
         <div className="container">

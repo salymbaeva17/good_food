@@ -8,21 +8,20 @@ const Browse = () => {
     const params = useParams()
     const [meals, setMeals] = useState([])
     const [notFound, setNotFound] = useState("")
-    useEffect(async () => {
-        async function fetchData() {
+    useEffect(() => {
+        const fetchData = async () => {
             const {data} = await axios(`https://www.themealdb.com/api/json/v1/1/search.php?s=${params.name}`)
             !data.meals ? setNotFound("Not Found") : setMeals(data.meals)
         }
-        await fetchData()
-
+        fetchData()
     }, [params.name])
     return (
         <div className="container dish pt-3">
-            {notFound ?<p className="text-center">{notFound}</p> :
+            {notFound ? <p className="text-center">{notFound}</p> :
                 <MealsList meals={meals}/>}
-            <BackToMealsButton />
+            <BackToMealsButton/>
         </div>
-);
+    );
 };
 
 export default Browse;
