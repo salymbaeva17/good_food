@@ -15,7 +15,7 @@ const IngredientMeal = () => {
         fetchData()
     }, [params.name])
     return (
-        <div className="container">
+        <div className="container mtop-5">
             <div className="row">
                 <Link className="col-3">
                     <img src={`https://www.themealdb.com/images/ingredients/${params.name}.png`}

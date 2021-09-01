@@ -10,8 +10,11 @@ const Browse = () => {
     const [notFound, setNotFound] = useState("")
     useEffect(() => {
         const fetchData = async () => {
+            setNotFound("")
             const {data} = await axios(`https://www.themealdb.com/api/json/v1/1/search.php?s=${params.name}`)
-            !data.meals ? setNotFound("Not Found") : setMeals(data.meals)
+            !data.meals ? setNotFound("Not Found") :
+                setMeals(data.meals)
+
         }
         fetchData()
     }, [params.name])
